@@ -41,7 +41,11 @@ public final class VariableLengthQuantity {
     }
     return size;
   }
+
   //动长
+//  把一个int32或者int64格式化到字符串中，除了上面说的little-endian字节序外，大部分还是变长存储的，也就是VarInt。
+//  对于VarInt，每byte的有效存储是7bit的，用最高的8bit位来表示是否结束，如果是1就表示后面还有一个byte的数字，
+//  否则表示结束。直接见Encode和Decode函数。
   public static void writeVariableLengthInt(int value, SliceOutput sliceOutput) {
     int highBitMask = 0x80;
     if (value < (1 << 7) && value >= 0) {
