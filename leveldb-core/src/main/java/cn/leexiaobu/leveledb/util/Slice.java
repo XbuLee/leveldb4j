@@ -97,8 +97,8 @@ public class Slice implements Comparable<Slice> {
   public int getInt(int index) {
     checkFromToIndex(index, index + SIZE_OF_INT, this.length);
     index += offset;
-    return (int) (data[index] & 0xFF | (data[index + 1] & 0xFF) << 8
-        | (data[index + 2] & 0xFF) << 16 | (data[index + 3] & 0xFF) << 24);
+    return data[index] & 0xFF | (data[index + 1] & 0xFF) << 8
+        | (data[index + 2] & 0xFF) << 16 | (data[index + 3] & 0xFF) << 24;
   }
 
   public long getLong(int index) {
