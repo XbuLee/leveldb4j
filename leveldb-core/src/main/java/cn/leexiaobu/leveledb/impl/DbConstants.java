@@ -19,7 +19,7 @@ package cn.leexiaobu.leveledb.impl;
 
 public final class DbConstants {
 
-  public static final int MAJOR_VERSION = 0;
+  public static final int MAJOR_VERSION = 3;
   public static final int MINOR_VERSION = 1;
 
   // todo this should be part of the configuration
