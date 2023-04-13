@@ -1,4 +1,4 @@
-package cn.leexiaobu.leveldb;
+package cn.leexiaobu.leveldb.api;
 
 /**
  * @author Leexiaobu

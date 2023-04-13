@@ -17,7 +17,7 @@
  */
 package cn.leexiaobu.leveldb.impl;
 
-import cn.leexiaobu.leveldb.Snapshot;
+import cn.leexiaobu.leveldb.api.Snapshot;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class SnapshotImpl implements Snapshot {

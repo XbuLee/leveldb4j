@@ -19,7 +19,7 @@ package cn.leexiaobu.leveldb.impl;
 
 import static java.util.Objects.requireNonNull;
 
-import cn.leexiaobu.leveldb.WriteBatch;
+import cn.leexiaobu.leveldb.api.WriteBatch;
 import cn.leexiaobu.leveldb.util.Slice;
 import cn.leexiaobu.leveldb.util.Slices;
 import com.google.common.collect.Maps;
@@ -43,8 +43,9 @@ public class WriteBatchImpl implements WriteBatch {
   @Override
   public WriteBatchImpl put(byte[] key, byte[] value) {
     requireNonNull(key, "key is null");
-    requireNonNull(value, "value is null");
+    requireNonNull(key, "value is null");
     batch.add(Maps.immutableEntry(Slices.wrappedBuffer(key), Slices.wrappedBuffer(value)));
+    //fixme 12?
     approximateSize += 12 + key.length + value.length;
     return this;
   }

@@ -15,17 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.leexiaobu.leveldb;
+package cn.leexiaobu.leveldb.api;
 
-import java.io.Closeable;
+public enum CompressionType {
+  NONE(0x00),
+  SNAPPY(0x01);
 
-/**
- * @author <a href="http://hiramchirino.com">Hiram Chirino</a>
- */
-public interface WriteBatch
-    extends Closeable {
+  private final int persistentId;
 
-  WriteBatch put(byte[] key, byte[] value);
+  CompressionType(int persistentId) {
+    this.persistentId = persistentId;
+  }
 
-  WriteBatch delete(byte[] key);
+  public static CompressionType getCompressionTypeByPersistentId(int persistentId) {
+    for (CompressionType compressionType : CompressionType.values()) {
+      if (compressionType.persistentId == persistentId) {
+        return compressionType;
+      }
+    }
+    throw new IllegalArgumentException("Unknown persistentId " + persistentId);
+  }
+
+  public int persistentId() {
+    return persistentId;
+  }
 }

@@ -15,38 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.leexiaobu.leveldb;
+package cn.leexiaobu.leveldb.table;
 
-public class ReadOptions {
+import cn.leexiaobu.leveldb.util.Slice;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.util.Comparator;
 
-  private boolean verifyChecksums;
-  private boolean fillCache = true;
-  private Snapshot snapshot;
+public class MMapTableTest extends TableTest {
 
-  public Snapshot snapshot() {
-    return snapshot;
-  }
-
-  public ReadOptions snapshot(Snapshot snapshot) {
-    this.snapshot = snapshot;
-    return this;
-  }
-
-  public boolean fillCache() {
-    return fillCache;
-  }
-
-  public ReadOptions fillCache(boolean fillCache) {
-    this.fillCache = fillCache;
-    return this;
-  }
-
-  public boolean verifyChecksums() {
-    return verifyChecksums;
-  }
-
-  public ReadOptions verifyChecksums(boolean verifyChecksums) {
-    this.verifyChecksums = verifyChecksums;
-    return this;
+  @Override
+  protected Table createTable(String name, FileChannel fileChannel, Comparator<Slice> comparator,
+      boolean verifyChecksums) throws IOException {
+    return new MMapTable(name, fileChannel, comparator, verifyChecksums);
   }
 }

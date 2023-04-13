@@ -18,7 +18,7 @@
 package cn.leexiaobu.leveldb.table;
 
 
-import static cn.leexiaobu.leveldb.CompressionType.SNAPPY;
+import static cn.leexiaobu.leveldb.api.CompressionType.SNAPPY;
 
 import cn.leexiaobu.leveldb.util.Slice;
 import cn.leexiaobu.leveldb.util.Slices;

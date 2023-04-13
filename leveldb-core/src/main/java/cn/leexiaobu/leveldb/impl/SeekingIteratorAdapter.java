@@ -19,7 +19,7 @@ package cn.leexiaobu.leveldb.impl;
 
 import static java.util.Objects.requireNonNull;
 
-import cn.leexiaobu.leveldb.DBIterator;
+import cn.leexiaobu.leveldb.api.DBIterator;
 import cn.leexiaobu.leveldb.util.Slice;
 import cn.leexiaobu.leveldb.util.Slices;
 import java.util.Map.Entry;

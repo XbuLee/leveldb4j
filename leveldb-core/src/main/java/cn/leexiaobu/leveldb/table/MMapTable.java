@@ -17,7 +17,7 @@
  */
 package cn.leexiaobu.leveldb.table;
 
-import static cn.leexiaobu.leveldb.CompressionType.SNAPPY;
+import static cn.leexiaobu.leveldb.api.CompressionType.SNAPPY;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import cn.leexiaobu.leveldb.util.ByteBufferSupport;

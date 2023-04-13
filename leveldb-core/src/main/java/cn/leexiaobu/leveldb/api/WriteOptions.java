@@ -15,26 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.leexiaobu.leveldb;
+package cn.leexiaobu.leveldb.api;
 
-/**
- * @author <a href="http://hiramchirino.com">Hiram Chirino</a>
- */
-public class DBException
-    extends RuntimeException {
+public class WriteOptions {
 
-  public DBException() {
+  private boolean sync;
+  private boolean snapshot;
+
+  public boolean sync() {
+    return sync;
   }
 
-  public DBException(String s) {
-    super(s);
+  public WriteOptions sync(boolean sync) {
+    this.sync = sync;
+    return this;
   }
 
-  public DBException(String s, Throwable throwable) {
-    super(s, throwable);
+  public boolean snapshot() {
+    return snapshot;
   }
 
-  public DBException(Throwable throwable) {
-    super(throwable);
+  public WriteOptions snapshot(boolean snapshot) {
+    this.snapshot = snapshot;
+    return this;
   }
 }

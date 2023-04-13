@@ -31,16 +31,16 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static java.util.Objects.requireNonNull;
 
-import cn.leexiaobu.leveldb.CompressionType;
-import cn.leexiaobu.leveldb.DB;
-import cn.leexiaobu.leveldb.DBComparator;
-import cn.leexiaobu.leveldb.DBException;
-import cn.leexiaobu.leveldb.Options;
-import cn.leexiaobu.leveldb.Range;
-import cn.leexiaobu.leveldb.ReadOptions;
-import cn.leexiaobu.leveldb.Snapshot;
-import cn.leexiaobu.leveldb.WriteBatch;
-import cn.leexiaobu.leveldb.WriteOptions;
+import cn.leexiaobu.leveldb.api.CompressionType;
+import cn.leexiaobu.leveldb.api.DB;
+import cn.leexiaobu.leveldb.api.DBComparator;
+import cn.leexiaobu.leveldb.api.DBException;
+import cn.leexiaobu.leveldb.api.Options;
+import cn.leexiaobu.leveldb.api.Range;
+import cn.leexiaobu.leveldb.api.ReadOptions;
+import cn.leexiaobu.leveldb.api.Snapshot;
+import cn.leexiaobu.leveldb.api.WriteBatch;
+import cn.leexiaobu.leveldb.api.WriteOptions;
 import cn.leexiaobu.leveldb.impl.Filename.FileInfo;
 import cn.leexiaobu.leveldb.impl.Filename.FileType;
 import cn.leexiaobu.leveldb.impl.MemTable.MemTableIterator;
@@ -728,9 +728,11 @@ public class DbImpl implements DB {
     return snapshot;
   }
 
+  /**
+   * 强制压缩
+   */
   private void makeRoomForWrite(boolean force) {
     checkState(mutex.isHeldByCurrentThread());
-
     boolean allowDelay = !force;
 
     while (true) {
@@ -740,6 +742,7 @@ public class DbImpl implements DB {
 //              s = bg_error_;
 //              break;
 //            } else
+      //当level0层文件数量过少时,写入速度降低,sleep 1 ms
       if (allowDelay && versions.numberOfFilesInLevel(0) > L0_SLOWDOWN_WRITES_TRIGGER) {
         // We are getting close to hitting a hard limit on the number of
         // L0 files.  Rather than delaying a single write by several
@@ -758,13 +761,13 @@ public class DbImpl implements DB {
         }
 
         // Do not delay a single write more than once
+        //只延迟一次
         allowDelay = false;
       } else if (!force && memTable.approximateMemoryUsage() <= options.writeBufferSize()) {
         // There is room in current memtable
         break;
       } else if (immutableMemTable != null) {
-        // We have filled up the current memtable, but the previous
-        // one is still being compacted, so we wait.
+        // immutableMemtable 没有压缩完成,所以等待
         backgroundCondition.awaitUninterruptibly();
       } else if (versions.numberOfFilesInLevel(0) >= L0_STOP_WRITES_TRIGGER) {
         // There are too many level-0 files.

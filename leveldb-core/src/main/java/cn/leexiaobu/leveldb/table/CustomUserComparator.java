@@ -18,7 +18,7 @@
 package cn.leexiaobu.leveldb.table;
 
 
-import cn.leexiaobu.leveldb.DBComparator;
+import cn.leexiaobu.leveldb.api.DBComparator;
 import cn.leexiaobu.leveldb.util.Slice;
 
 public class CustomUserComparator implements UserComparator {

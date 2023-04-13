@@ -19,7 +19,7 @@ package cn.leexiaobu.leveldb.table;
 
 import static java.util.Objects.requireNonNull;
 
-import cn.leexiaobu.leveldb.CompressionType;
+import cn.leexiaobu.leveldb.api.CompressionType;
 import cn.leexiaobu.leveldb.util.Slice;
 import cn.leexiaobu.leveldb.util.SliceInput;
 import cn.leexiaobu.leveldb.util.SliceOutput;

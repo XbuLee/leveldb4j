@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.leexiaobu.leveldb;
+package cn.leexiaobu.leveldb.api;
 
 import java.io.Closeable;
 import java.util.Iterator;

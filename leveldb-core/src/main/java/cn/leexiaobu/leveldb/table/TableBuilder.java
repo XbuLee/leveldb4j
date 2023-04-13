@@ -21,8 +21,8 @@ import static cn.leexiaobu.leveldb.impl.VersionSet.TARGET_FILE_SIZE;
 import static com.google.common.base.Preconditions.checkState;
 import static java.util.Objects.requireNonNull;
 
-import cn.leexiaobu.leveldb.CompressionType;
-import cn.leexiaobu.leveldb.Options;
+import cn.leexiaobu.leveldb.api.CompressionType;
+import cn.leexiaobu.leveldb.api.Options;
 import cn.leexiaobu.leveldb.util.PureJavaCrc32C;
 import cn.leexiaobu.leveldb.util.Slice;
 import cn.leexiaobu.leveldb.util.Slices;

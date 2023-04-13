@@ -15,22 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.leexiaobu.leveldb;
+package cn.leexiaobu.leveldb.api;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.Closeable;
 
-/**
- * @author <a href="http://hiramchirino.com">Hiram Chirino</a>
- */
-public interface DBFactory {
+public interface Snapshot extends Closeable {
 
-  DB open(File path, Options options)
-      throws IOException;
-
-  void destroy(File path, Options options)
-      throws IOException;
-
-  void repair(File path, Options options)
-      throws IOException;
 }

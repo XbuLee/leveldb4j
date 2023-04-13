@@ -15,28 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.leexiaobu.leveldb;
+package cn.leexiaobu.leveldb.table;
 
-/**
- * @author <a href="http://hiramchirino.com">Hiram Chirino</a>
- */
-public class Range {
+import cn.leexiaobu.leveldb.util.Slice;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.util.Comparator;
 
-  private final byte[] start;
-  private final byte[] limit;
+public class FileChannelTableTest extends TableTest {
 
-  public Range(byte[] start, byte[] limit) {
-    Options.checkArgNotNull(start, "start");
-    Options.checkArgNotNull(limit, "limit");
-    this.limit = limit;
-    this.start = start;
-  }
-
-  public byte[] limit() {
-    return limit;
-  }
-
-  public byte[] start() {
-    return start;
+  @Override
+  protected Table createTable(String name, FileChannel fileChannel, Comparator<Slice> comparator,
+      boolean verifyChecksums) throws IOException {
+    return new FileChannelTable(name, fileChannel, comparator, verifyChecksums);
   }
 }

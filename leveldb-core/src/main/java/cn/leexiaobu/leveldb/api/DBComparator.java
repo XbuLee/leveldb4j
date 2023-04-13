@@ -15,12 +15,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.leexiaobu.leveldb;
+package cn.leexiaobu.leveldb.api;
+
+import java.util.Comparator;
 
 /**
  * @author <a href="http://hiramchirino.com">Hiram Chirino</a>
  */
-public interface Logger {
+public interface DBComparator
+    extends Comparator<byte[]> {
 
-  void log(String message);
+  String name();
+
+  /**
+   * If {@code start < limit}, returns a short key in [start,limit). Simple comparator
+   * implementations should return start unchanged,
+   */
+  byte[] findShortestSeparator(byte[] start, byte[] limit);
+
+  /**
+   * returns a 'short key' where the 'short key' is greater than or equal to key. Simple comparator
+   * implementations should return key unchanged,
+   */
+  byte[] findShortSuccessor(byte[] key);
 }

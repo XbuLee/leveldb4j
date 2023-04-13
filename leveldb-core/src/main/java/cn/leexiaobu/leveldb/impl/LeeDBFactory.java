@@ -19,9 +19,9 @@ package cn.leexiaobu.leveldb.impl;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import cn.leexiaobu.leveldb.DB;
-import cn.leexiaobu.leveldb.DBFactory;
-import cn.leexiaobu.leveldb.Options;
+import cn.leexiaobu.leveldb.api.DB;
+import cn.leexiaobu.leveldb.api.DBFactory;
+import cn.leexiaobu.leveldb.api.Options;
 import cn.leexiaobu.leveldb.util.FileUtils;
 import java.io.BufferedReader;
 import java.io.File;
